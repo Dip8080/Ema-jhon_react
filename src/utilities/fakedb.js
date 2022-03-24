@@ -35,7 +35,18 @@ const deleteShoppingCart = () =>{
     localStorage.removeItem('shopping-cart');
 }
 
+
+const getFromLocal = ()=>{
+    let newObj = {};
+    const localObj = localStorage.getItem('shopping-cart')
+    if(localObj){
+        newObj = JSON.parse(localObj);
+    }
+    return newObj
+
+}
 export {
+    getFromLocal,
     addToDb, 
     removeFromDb,
     deleteShoppingCart

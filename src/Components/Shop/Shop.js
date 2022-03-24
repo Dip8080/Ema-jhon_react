@@ -1,18 +1,35 @@
 import React, { useEffect, useState } from 'react';
+import { addToDb, getFromLocal } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import('./Shop.css')
+
+
 const Shop = () => {
     const [products ,setProducts] = useState([]);
-    const [cart ,setCart] = useState([])
     useEffect(()=>{
         fetch('products.json')
         .then(res=>res.json())
         .then(data=>setProducts(data))
        
     },[])
+
+    useEffect(()=>{
+        const localObj = getFromLocal();
+        const newArray = []
+        for(const id in localObj){
+            const addedProduct = products.find(x => x.id === id);
+            if(addedProduct){
+                newArray.push(addedProduct)
+            }
+        }
+        setCart(newArray)
+    },[products])
+    const [cart ,setCart] = useState([])
+    // unidirectional chaining , function reference diye function re call
     const Funhandle = (data)=>{
       const newArr = [...cart , data];
-      setCart(newArr)
+      setCart(newArr);
+      addToDb(data.id);
     }
    
     return (
@@ -48,6 +65,7 @@ const {name, price , id ,img , seller ,ratings} = props.object;
                 <p>rating : {ratings}</p>
                 <p></p>
             </div>
+            {/* this function is not defined here .. get here by props provprty */}
             <button onClick={()=>fuction(props.object)} className='btn'>Add to cart</button>
         </div>
     )
