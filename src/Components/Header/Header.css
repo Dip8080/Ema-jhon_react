@@ -1,0 +1,22 @@
+.header{
+    background-color: black;
+    padding: 20px;
+}
+.nav_container{
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+}
+
+.anchor a {
+    color: aliceblue;
+    margin-left: 18px;
+    transition: color .5s;
+}
+.anchor a:hover{
+    color: orange;
+    
+}

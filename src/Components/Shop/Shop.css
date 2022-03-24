@@ -1,0 +1,38 @@
+.grandParent{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    padding: 20px 0px 20px 0px;
+}
+.product{
+    width: 250px;
+    height: 508px;
+    border: 1px solid  rgba(182, 178, 178, 0.507);
+    /* border-style: outset; */
+    border-radius: 4px ;
+    padding: 5px;
+    position: relative;
+    
+}
+.product img{
+    width: 200px;
+    height: 286px;
+    border-radius: 4px;
+    margin-left: 22px;
+    margin-top: 6px;
+}
+.parent{
+    display: grid;
+    grid-template-columns: repeat(3 ,1fr);
+    gap: 8px;
+    
+}
+.summery{
+    padding: 12px;
+    background-color: rgba(216, 142, 6, 0.356);
+   
+}
+.btn{
+    position: absolute;
+    bottom: 0;
+    width:98%;
+}
