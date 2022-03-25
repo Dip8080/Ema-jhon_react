@@ -6,6 +6,7 @@ import('./Shop.css')
 
 const Shop = () => {
     const [products ,setProducts] = useState([]);
+ 
     useEffect(()=>{
         fetch('products.json')
         .then(res=>res.json())
@@ -16,18 +17,43 @@ const Shop = () => {
     useEffect(()=>{
         const localObj = getFromLocal();
         const newArray = []
+       
         for(const id in localObj){
+            // .find alwaya returns 1st matched element , not array like map n filter
+            // here addedproduct is an object . cz .find will return an object
             const addedProduct = products.find(x => x.id === id);
+          
             if(addedProduct){
+                const quantity = localObj[id];
+                // now set quantity as a property of  addedprorduct  object 
+                addedProduct.quantity = quantity
                 newArray.push(addedProduct)
             }
         }
+        // console.log(newArray)
         setCart(newArray)
     },[products])
-    const [cart ,setCart] = useState([])
+
+
+   
+// setcart is in neutral zone . bor useffect and usestate are using it 
+    
+   const [cart ,setCart] = useState([])
+    
     // unidirectional chaining , function reference diye function re call
     const Funhandle = (data)=>{
-      const newArr = [...cart , data];
+      let newArr = [];
+      const exists = cart.find(x=>x.id===data.id);
+      if(!exists){
+          data.quantity =1;
+         newArr = [...cart , data];
+      }
+      else{
+          const rest = cart.filter(x=>x.id!==data.id);
+          data.quantity = data.quantity+1;
+          newArr = [...rest , data]
+      }
+     
       setCart(newArr);
       addToDb(data.id);
     }

@@ -2,13 +2,14 @@ import React from 'react';
 import('./Cart.css')
 const Cart = (props)=> {
    const cartArray = props.property;
+   
    let totalCost = 0;
    let totalShipping = 0;
-   let quantity = 0
+   let TotalQuantity = 0
 
    for (const product of cartArray){
-       quantity =quantity + product.quantity;
-       totalCost =totalCost + product.price;
+       TotalQuantity = TotalQuantity + product.quantity;
+       totalCost =totalCost + product.price * product.quantity;
        totalShipping = totalShipping + product.shipping
    }
 
@@ -17,7 +18,7 @@ const Cart = (props)=> {
     return (
         <div className='cart'>
              <h1>product summery</h1>
-                <p>selected items: {cartArray.length}</p>
+                <p>selected items: {TotalQuantity}</p>
                 <p>total cost : {totalCost}</p>
                 <p>total shipping: {totalShipping}</p>
                 <p>tax :{tax} </p>
